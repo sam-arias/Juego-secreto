@@ -13,18 +13,23 @@ function asignarTextoElemento(elemento, texto) {
 function verificarIntento() {
   let numeroDeUsuario = parseInt(document.getElementById("valorUsuario").value);
 
-  if (numeroDeUsuario === numeroSecreto) {
-    asignarTextoElemento("p", `Acertaste el número en ${intentos} ${intentos == 1 ? "vez" : "veces"}`);
-    document.getElementById("reiniciar").removeAttribute("disabled");
-  } else {
-    // El usuario no acertó.
-    if (numeroDeUsuario > numeroSecreto) {
-      asignarTextoElemento("p", "El número secreto es menor");
-    } else {
-      asignarTextoElemento("p", "El número secreto es mayor");
-    }
-    intentos++;
+  if (numeroDeUsuario < 1 || numeroDeUsuario > numeroMaximo){
+    asignarTextoElemento('p', `Ingresa un número valido`);
     limpiarCaja();
+  } else {
+    if (numeroDeUsuario === numeroSecreto) {
+      asignarTextoElemento("p", `Acertaste el número en ${intentos} ${intentos == 1 ? "vez" : "veces"}`);
+      document.getElementById("reiniciar").removeAttribute("disabled");
+    } else {
+      // El usuario no acertó.
+      if (numeroDeUsuario > numeroSecreto) {
+        asignarTextoElemento("p", "El número secreto es menor");
+      } else {
+        asignarTextoElemento("p", "El número secreto es mayor");
+      }
+      intentos++;
+      limpiarCaja();
+    }
   }
   return;
 }
